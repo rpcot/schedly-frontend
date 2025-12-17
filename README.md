@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://schedule.rpcot.ru"><img src="https://api.rpcot.ru/images/rasp-logo" alt="SCHEDLY Logo" width="120" /></a>
+  <a href="https://schedule.rpcot.ru"><img src="https://api.rpcot.ru/images/rasp-logo" alt="SCHEDLY Logo" /></a>
 </p>
 
 <h1 align="center">SCHEDLY — Frontend</h1>
