@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 
 import App from './App';
 import UpdateLayout from './layouts/UpdatesLayout';
@@ -16,6 +16,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ServerErrorPage />,
     children: [
+      {
+        path: 'schedule',
+        element: <Navigate to="/" replace />,
+      },
       {
         index: true,
         element: <Schedule />,
