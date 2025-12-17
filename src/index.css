@@ -1,0 +1,27 @@
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6b46c1;
+  border-radius: 20px;
+  border: 2px solid #1A202C;
+}
+
+body {
+  scrollbar-color: #6b46c1 #0d0d0d;
+  scrollbar-width: auto;
+}
+
+.scroll-offset-target {
+  margin-top: -80px;
+  padding-top: 80px;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
