@@ -1,6 +1,7 @@
 import { Card, Heading, VStack, Text, Icon, Tooltip } from "@chakra-ui/react";
 import ScheduleLessonCard from "./ScheduleLessonCard";
-import { MdPushPin } from "react-icons/md";
+import { MdCelebration, MdPushPin } from "react-icons/md";
+import { isTouchDevice } from "../utils/device";
 
 export default function ScheduleDayCardSkeleton({ dayName, data, scrollToRef }) {
   return (
@@ -22,9 +23,9 @@ export default function ScheduleDayCardSkeleton({ dayName, data, scrollToRef }) 
           <Heading as="h4" size="md" textTransform="capitalize">
             {dayName} ({data.date}) {data.today ? "- Сегодня" : ""}
           </Heading>
-          <Text as="h6" size="sm" color="gray.200">
+          {!data.holiday && <Text as="h6" size="sm" color="gray.200">
             {data.lessonsStartTime} – {data.lessonsEndTime}
-          </Text>
+          </Text>}
           {data.note && <Text as="h6" size="sm" color="gray.400" alignItems="center" display="inline-flex">
             <Tooltip
               aria-label="примечание"
@@ -37,11 +38,23 @@ export default function ScheduleDayCardSkeleton({ dayName, data, scrollToRef }) 
             {data.note}
           </Text>}
         </VStack>
-        <VStack spacing={2}>
-          {data.lessons.map((lesson, index) => (
-            <ScheduleLessonCard key={index} number={index + 1} lesson={lesson} />
-          ))}
-        </VStack>
+        {data.holiday && <Text
+          as="span"
+          display="inline-flex"
+          alignItems="center"
+          justifyContent="center"
+          mb={isTouchDevice() ? 0 : 4}
+        >
+          <Icon as={MdCelebration} color="purple.400" w={4} h={4} mr={2} />
+          В данный день нет уроков
+        </Text>}
+        {!data.holiday || (data.holiday && !isTouchDevice())
+          ? <VStack spacing={2} opacity={data.holiday ? 0.2 : 1}>
+            {data.lessons.map((lesson, index) => (
+              <ScheduleLessonCard key={index} number={index + 1} lesson={lesson} />
+            ))}
+          </VStack>
+          : null}
       </Card>
     </>
   );
