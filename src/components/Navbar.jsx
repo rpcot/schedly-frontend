@@ -12,6 +12,7 @@ import {
   Collapse,
   Image,
   Icon,
+  Grid,
 } from '@chakra-ui/react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
@@ -117,38 +118,32 @@ export default function NavBar() {
         zIndex="sticky"
       >
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'} maxW="8xl" mx="auto">
+          <Grid
+            templateColumns="1fr auto 1fr"
+            alignItems="center"
+            w="full"
+          >
+            <Flex alignItems="center">
+              <Image src='./favicon.png' alt='logo' boxSize='50px' mr={3} />
+              <Text
+                as="a"
+                href="/"
+                fontSize="xl"
+                fontWeight="bold"
+                color="text.DEFAULT"
+                whiteSpace="nowrap"
+                _hover={{ textDecoration: 'none' }}
+              >
+                SCHEDLY 🎄
+              </Text>
+            </Flex>
 
-          <Flex alignItems={'center'}>
-            <Image
-              src='https://api.rpcot.ru/images/rasp-logo'
-              alt='logo'
-              boxSize='50px'
-              mr={3}
-            />
-            <Text
-              as="a"
-              href="/"
-              fontSize="xl"
-              fontWeight="bold"
-              color="text.DEFAULT"
-              decoration='none'
-              _hover={{
-                textDecoration: 'none',
-              }}
-            >
-              SCHEDLY
-            </Text>
-          </Flex>
+            <Box display={{ base: 'none', md: 'flex' }} justifyContent="center">
+              <NavLinks activeUrl={currentPath} />
+            </Box>
 
-          <Spacer display={{ base: 'none', md: 'flex' }} />
-
-          <Box display={{ base: 'none', md: 'flex' }} ml={10}>
-            <NavLinks activeUrl={currentPath} />
-          </Box>
-
-          <Spacer display={{ base: 'none', md: 'flex' }} />
-
-          <Spacer />
+            <Box display={{ base: 'none', md: 'flex' }} justifyContent="flex-end" />
+          </Grid>
 
           <IconButton
             size={'md'}
@@ -168,29 +163,27 @@ export default function NavBar() {
             <Stack as={'nav'} spacing={4} mt={2}>
               {Links.map((link) => (
                 link.external
-                  ? <>
-                    <ChakraLink
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      bg="transparent"
-                      display="inline-flex"
-                      alignItems="center"
-                      _hover={{
-                        textDecoration: 'underline'
-                      }}
-                      onClick={onClose}
-                    >
-                      <Box as="span">{link.name}</Box>
-                      <Icon
-                        as={MdOpenInNew}
-                        w={4}
-                        h={4}
-                        ml={1.5}
-                      />
-                    </ChakraLink>
-                  </>
+                  ? <ChakraLink
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    bg="transparent"
+                    display="inline-flex"
+                    alignItems="center"
+                    _hover={{
+                      textDecoration: 'underline'
+                    }}
+                    onClick={onClose}
+                  >
+                    <Box as="span">{link.name}</Box>
+                    <Icon
+                      as={MdOpenInNew}
+                      w={4}
+                      h={4}
+                      ml={1.5}
+                    />
+                  </ChakraLink>
                   : <ChakraLink
                     key={link.name}
                     as={RouterLink}
