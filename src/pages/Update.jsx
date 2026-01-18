@@ -106,42 +106,44 @@ export default function Update() {
 
       <Container mt={16} maxW="container.xl" py={10} centerContent>
         <VStack spacing={8} align="stretch" w="full">
-          <HStack>
+            <VStack spacing={2}>
+          <HStack
+            w="full"
+            alignItems="start"
+          >
             <Link
               as={RouterLink}
               display="inline-flex"
               alignItems="center"
               to="/updates"
             >
-              <Icon as={MdArrowBack} w={4} h={4} />
+              <Icon as={MdArrowBack} w={4} h={4} mr={2} />
+              Обновления
             </Link>
-            <Breadcrumb>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/updates">Обновления</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbItem isCurrentPage>
-                <BreadcrumbLink href="#">{updateData?.title || 'Подробности'}</BreadcrumbLink>
-              </BreadcrumbItem>
-            </Breadcrumb>
           </HStack>
 
-          <HStack
-            w="full"
-            justifyContent="center"
-            alignItems="center"
-          >
-            {(!isLoading && !isError && updateData) && (
-              <>
-                <UpdateBadge bg="purple.300">
-                  {updateData.version}
+            <HStack
+              w="full"
+              justifyContent="center"
+              alignItems="center"
+            >
+              {(!isLoading && !isError && updateData) && (
+                <>
+                <UpdateBadge bg="text.DEFAULT">
+
+               {new Date(updateData.date).toLocaleDateString()}
                 </UpdateBadge>
-                <UpdateBadge type={updateData.type}>{updateTypes[updateData.type]}</UpdateBadge>
-                {updateData.involvedSystems.map((system, index) => (
-                  <UpdateBadge key={index} bg="text.DEFAULT">{systemNames[system]}</UpdateBadge>
-                ))}
-              </>
-            )}
-          </HStack>
+                  <UpdateBadge bg="purple.300">
+                    {updateData.version}
+                  </UpdateBadge>
+                  <UpdateBadge type={updateData.type}>{updateTypes[updateData.type]}</UpdateBadge>
+                  {updateData.involvedSystems.map((system, index) => (
+                    <UpdateBadge key={index} bg="text.DEFAULT">{systemNames[system]}</UpdateBadge>
+                  ))}
+                </>
+              )}
+            </HStack>
+          </VStack>
           <Heading
             color="purple.400"
             size="2xl"

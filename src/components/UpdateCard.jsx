@@ -1,4 +1,4 @@
-import { Card, Heading, HStack, LinkBox, LinkOverlay, VStack } from "@chakra-ui/react";
+import { Card, Heading, HStack, LinkBox, LinkOverlay, Text, VStack } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 import UpdateBadge from "./UpdateBadge";
@@ -52,6 +52,16 @@ export default function UpdateCard({ data }) {
                   {data.title}
                 </Heading>
               </LinkOverlay>
+            </HStack>
+            <HStack
+              w="full"
+              alignItems="start"
+            >
+              <Text
+                as="span"
+              >
+                {new Date(data.date).toLocaleDateString()}
+              </Text>
             </HStack>
           </VStack>
         </Card>
