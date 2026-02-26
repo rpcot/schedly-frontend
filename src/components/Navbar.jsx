@@ -6,7 +6,6 @@ import {
   useColorModeValue,
   Stack,
   IconButton,
-  Spacer,
   Link as ChakraLink,
   HStack,
   Collapse,
@@ -134,7 +133,7 @@ export default function NavBar() {
                 whiteSpace="nowrap"
                 _hover={{ textDecoration: 'none' }}
               >
-                SCHEDLY 🎄
+                SCHEDLY
               </Text>
             </Flex>
 

@@ -1,6 +1,5 @@
 import { Box, Flex } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
-import Snowfall from 'react-snowfall';
 
 import NavBar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
@@ -14,7 +13,6 @@ export default function App() {
       p={0}
       overflow="hidden"
     >
-      <Snowfall snowflakeCount={30} style={{ position: 'fixed' }} />
       <ScrollToTop />
 
       <NavBar />
