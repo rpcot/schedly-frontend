@@ -77,6 +77,7 @@ export default function ScheduleLessonCard({ number, lesson }) {
         <VStack
           flex="1"
           align="start"
+          justify="center"
           spacing={1}
           py={2}
         >
@@ -114,14 +115,10 @@ export default function ScheduleLessonCard({ number, lesson }) {
             </Text>
           </Flex>
 
-          <Divider borderColor="bg.neutral" my={1} />
+          {lesson.homework.length > 0 && <>
+            <Divider borderColor="bg.neutral" my={1} />
 
-          <VStack align="start" spacing={1}>
-            {!lesson.homework[0] ? (
-              <Text as="span" fontSize="sm" fontWeight="medium" color="gray.400">
-                Домашнее задание не указано
-              </Text>
-            ) : (
+            <VStack align="start" spacing={1}>
               <Flex
                 align="center"
                 justify="center"
@@ -147,46 +144,45 @@ export default function ScheduleLessonCard({ number, lesson }) {
                   ))}
                 </VStack>
               </Flex>
-            )
-            }
-            {!!lesson.attachments.length && (
-              <HStack direction="row" spacing={2} justify="start">
-                <Icon as={MdAttachFile} w={4} h={4} />
-                {lesson.attachments.map((attachment, index) => (
-                  <Link
-                    as="a"
-                    key={index}
-                    href={attachment.url}
-                    isExternal
-                    fontSize="sm"
-                    color="gray.100"
-                    _hover={{ textDecoration: 'underline', color: "gray.50" }}
-                  >
-                    {attachment.name}
-                  </Link>
-                ))}
-              </HStack>
-            )}
-            {lesson.exam && (
-              <Tooltip
-                label="Проверочная работа"
-                aria-label="exam-tooltip"
-                openDelay={500}
-                hasArrow
-              >
-                <Text
-                  fontSize="sm"
-                  color="purple.400"
-                  alignItems="center"
-                  display="inline-flex"
-                  fontWeight="medium"
+              {!!lesson.attachments.length && (
+                <HStack direction="row" spacing={2} justify="start">
+                  <Icon as={MdAttachFile} w={4} h={4} />
+                  {lesson.attachments.map((attachment, index) => (
+                    <Link
+                      as="a"
+                      key={index}
+                      href={attachment.url}
+                      isExternal
+                      fontSize="sm"
+                      color="gray.100"
+                      _hover={{ textDecoration: 'underline', color: "gray.50" }}
+                    >
+                      {attachment.name}
+                    </Link>
+                  ))}
+                </HStack>
+              )}
+              {lesson.exam && (
+                <Tooltip
+                  label="Проверочная работа"
+                  aria-label="exam-tooltip"
+                  openDelay={500}
+                  hasArrow
                 >
-                  <Icon as={MdWarning} w={4} h={4} mr={2} />
-                  {lesson.exam}
-                </Text>
-              </Tooltip>
-            )}
-          </VStack>
+                  <Text
+                    fontSize="sm"
+                    color="purple.400"
+                    alignItems="center"
+                    display="inline-flex"
+                    fontWeight="medium"
+                  >
+                    <Icon as={MdWarning} w={4} h={4} mr={2} />
+                    {lesson.exam}
+                  </Text>
+                </Tooltip>
+              )}
+            </VStack>
+          </>}
         </VStack>
 
       </Flex>
