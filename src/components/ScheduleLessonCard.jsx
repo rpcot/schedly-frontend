@@ -27,6 +27,11 @@ export default function ScheduleLessonCard({ number, lesson }) {
     ? "gray.900"
     : "gray.800";
 
+  const isShowHomework = lesson.homework.length > 0;
+  const isShowExam = !!lesson.exam;
+  const isShowAttachments = lesson.attachments.length > 0;
+  const isShowEntities = isShowHomework || isShowExam || isShowAttachments;
+
   const copyToClipboard = (text) => {
     navigator.clipboard.writeText(text);
     toast({
@@ -115,7 +120,7 @@ export default function ScheduleLessonCard({ number, lesson }) {
             </Text>
           </Flex>
 
-          {lesson.homework.length > 0 && <>
+          {isShowEntities && <>
             <Divider borderColor="bg.neutral" my={1} />
 
             <VStack align="start" spacing={1}>
@@ -123,28 +128,30 @@ export default function ScheduleLessonCard({ number, lesson }) {
                 align="center"
                 justify="center"
               >
-                <Icon as={MdHome} color="gray.300" w={4} h={4} mr={2} />
-                <VStack align="start" spacing={0}>
-                  {lesson.homework.map((text, index) => (
-                    <Text
-                      key={index}
-                      fontSize="sm"
-                      fontWeight="medium"
-                      as="span"
-                      color="gray.300"
-                      cursor="pointer"
-                      onClick={() => copyToClipboard(text)}
-                      _hover={{
-                        color: 'gray.200',
-                      }}
-                      transition="all 0.2s"
-                    >
-                      {text}
-                    </Text>
-                  ))}
-                </VStack>
+                {isShowHomework && <>
+                  <Icon as={MdHome} color="gray.300" w={4} h={4} mr={2} />
+                  <VStack align="start" spacing={0}>
+                    {lesson.homework.map((text, index) => (
+                      <Text
+                        key={index}
+                        fontSize="sm"
+                        fontWeight="medium"
+                        as="span"
+                        color="gray.300"
+                        cursor="pointer"
+                        onClick={() => copyToClipboard(text)}
+                        _hover={{
+                          color: 'gray.200',
+                        }}
+                        transition="all 0.2s"
+                      >
+                        {text}
+                      </Text>
+                    ))}
+                  </VStack>
+                </>}
               </Flex>
-              {!!lesson.attachments.length && (
+              {isShowAttachments && (
                 <HStack direction="row" spacing={2} justify="start">
                   <Icon as={MdAttachFile} w={4} h={4} />
                   {lesson.attachments.map((attachment, index) => (
@@ -162,7 +169,7 @@ export default function ScheduleLessonCard({ number, lesson }) {
                   ))}
                 </HStack>
               )}
-              {lesson.exam && (
+              {isShowExam && (
                 <Tooltip
                   label="Проверочная работа"
                   aria-label="exam-tooltip"
